@@ -1,8 +1,9 @@
 class Player:
     """
-
+    id : Identifiant National d'Echec
     """
-    def __init__(self,firstname,lastname,birth):
+    def __init__(self,id,firstname,lastname,birth):
+        self.id = id
         self.firstname = firstname
         self.lastname = lastname
         self.birth = birth
