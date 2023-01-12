@@ -4,6 +4,7 @@ from Controller import Playercreation
 
 MENU_PRINCIPAL = ["Gestion Joueurs",
 "Gestion Tournois",
+"Rapports",
 "Quitter"]
 
 GESTION_JOUEURS = ["Nouveau joueur",

@@ -13,3 +13,5 @@ def main():
     lastname = Userinterface.user_input("Prénom")
     birth = Userinterface.user_input("Date de naissance")
     newplayer = Player.Player(id,firstname, lastname, birth)
+    #is_saved pour indiquer si sauvegarde json ok (True)
+    is_saved = Player.save_player(newplayer)
