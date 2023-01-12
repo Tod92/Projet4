@@ -44,7 +44,7 @@ def save_file(liste_joueurs):
     with open(SAVE_PATH, 'w') as file:
         json.dump(json_liste_joueurs, file)
         print("enregistrement ok")
-
+    return True
 
 def save_player(player_object):
     liste_joueurs = load_file()
