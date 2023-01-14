@@ -1,6 +1,6 @@
 import json, jsonpickle
 
-SAVE_PATH = "Players.json"
+SAVE_PATH = "Data\Players.json"
 
 
 class Player:
@@ -16,6 +16,7 @@ class Player:
     def __str__(self):
         return self.firstname + "" + self.lastname + " né(e) le " + str(self.birth)
 
+#class Player_Manager:
 def load_file():
     """
     Fonction qui ouvre le fichier de sauvegarde SAVE_PATH et retourne la liste
@@ -37,7 +38,7 @@ def load_file():
 
 def save_file(liste_joueurs):
     """
-    Fonction qui va serialiser la liste de jouurs en JSON puis écrire le
+    Fonction qui va serialiser la liste de joueurs en JSON puis écrire le
     fichier dans SAVE_PATH
     """
     json_liste_joueurs = jsonpickle.encode(liste_joueurs)

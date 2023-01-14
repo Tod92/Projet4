@@ -23,6 +23,7 @@ def player_menu(player_object):
             pass
         elif choix == 1:
             #Todo : confirmation et suppression
+            pass
 
 def player_management():
     while True:

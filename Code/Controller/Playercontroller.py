@@ -7,12 +7,20 @@ from View import Userinterface
 
 
 def player_creation():
-    id = Userinterface.user_input("Identifiant National d'Echec")
+    #while True:
+        #chess_id = Userinterface.user_input("Identifiant National d'Echec")
+        #if is_chess_id_format(chess_id) == False:
+            #message a demander a View
+            #break
+        #if is_avaible(chess_id) == False:
+            #message a demander a View
+            #break
+    chess_id = Userinterface.user_input("Identifiant National d'Echec")
     #TODO : verification que l'id n'est pas deja en base
     firstname = Userinterface.user_input("Prénom")
     lastname = Userinterface.user_input("Nom")
     birth = Userinterface.user_input("Date de naissance")
-    newplayer = Player.Player(id,firstname, lastname, birth)
+    newplayer = Player.Player(chess_id,firstname, lastname, birth)
     #is_saved pour indiquer si sauvegarde json ok (True)
     is_saved = Player.save_player(newplayer)
     return is_saved
