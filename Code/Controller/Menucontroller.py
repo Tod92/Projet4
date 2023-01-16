@@ -16,6 +16,10 @@ GESTION_TOURNOIS = ["Nouveau Tournoi",
 MENU_JOUEUR = ["Modifier",
                "Supprimer"]
 
+MENU_TOURNOI = ["Modifier informations tournoi",
+                "Participants",
+                "Tours"]
+
 DRAW = "Match nul"
 WINNER_QUESTION = "Indiquer le vainqueur du match"
 
@@ -43,14 +47,19 @@ def player_menu(player_object):
             #Todo : confirmation et suppression
             pass
 
-            
+
 def tournament_menu(tournament_object):
     while True:
+        userinterface.affiche(tournament_object)
         choix = userinterface.pick(MENU_TOURNOI, back = True)
         if choix == -1:
             break
         elif choix == 0:
-          pass
+            tournamentcontroller.tournament_modification(tournament_object)
+        elif choix == 1:
+            tournamentcontroller.player_management(tournament_object)
+        elif choix == 2:
+            tournamentcontroller.turn_management(tournament_object)
 
 
 def player_management():

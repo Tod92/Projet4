@@ -30,7 +30,7 @@ class Tournament:
         result += "Participants : " + str(self.players_list)
 
         return result
-               
+
 
 def load_file():
     """
@@ -64,5 +64,10 @@ def save_file(liste_tournois):
 
 def save_tournament(tournament_object):
     liste_tournois = load_file()
+    #suppression du tournois à remplacer avec même id
+    for i in range(len(liste_tournois)):
+        if liste_tournois[i]._id == tournament_object._id:
+            liste_tournois.pop(i)
+            break
     liste_tournois.append(tournament_object)
     save_file(liste_tournois)

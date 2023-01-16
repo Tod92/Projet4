@@ -5,6 +5,10 @@ from View import userinterface
 START_DATE_WAIT_MSG = "En attente du démarrage du premier tour"
 END_DATE_WAIT_MSG = "En attente de la fin du tournoi"
 
+MENU_MODIFICATION = ["Nom",
+                     "Lieu",
+                     "Description"]
+
 
 def tournament_creation():
     #id détérminé par le nombre de tournois présents dans le fichier json
@@ -30,7 +34,7 @@ def tournament_creation():
 
 def tournament_list():
     """
-    Liste les tournois par date de demarrage, les non-démarrés en premier
+    Liste les tournois par ordre de création,
     renvoi l'objet tournament choisi ou None si retour
     """
     liste_tournois = tournament.load_file()
@@ -40,3 +44,19 @@ def tournament_list():
     if choix == -1:
         return None
     return liste_tournois[choix]
+
+
+def tournament_modification(tournament_object):
+    """
+    Affiche et permet de choisir l'element modifiable par l'utilisateur
+    """
+    choix = userinterface.pick(MENU_MODIFICATION, back = True)
+    if choix == -1:
+        return None
+    elif choix == 0:
+        tournament_object.name = userinterface.user_input("Nom du tournoi")
+    elif choix == 1:
+        tournament_object.place = userinterface.user_input("Lieu du tournoi")
+    elif choix == 2:
+        tournament_object.description = userinterface.user_input("Description du tournoi")
+    tournament.save_tournament(tournament_object)
