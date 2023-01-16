@@ -1,1 +1,1 @@
-"[{\"py/object\": \"Model.Player.Player\", \"id\": \"AB1234\", \"firstname\": \"Thomas\", \"lastname\": \"Deruere\", \"birth\": \"01012000\"}, {\"py/object\": \"Model.Player.Player\", \"id\": \"ZZ\", \"firstname\": \"toto\", \"lastname\": \"toto\", \"birth\": \"toto\"}]"
+"[{\"py/object\": \"Model.player.Player\", \"id\": \"AB1234\", \"firstname\": \"toto\", \"lastname\": \"dupond\", \"birth\": \"01012000\"}, {\"py/object\": \"Model.player.Player\", \"id\": \"ZZ4321\", \"firstname\": \"titi\", \"lastname\": \"Andreski\", \"birth\": \"10121999\"}]"

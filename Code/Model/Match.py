@@ -14,19 +14,3 @@ class Match:
 
     def __repr__(self):
         return "Match : " + str(self.player1) + " contre " + str(self.player2)
-
-    def closing(self, winner):
-        """
-        winner : joueur ayant remporté le match
-        si nul, winner = None
-        Retourne un tuple contenant deux listes, chacune
-        contenant deux éléments : un joueur et un score
-        """
-        if winner == self.player1:
-            p1score, p2score = 1 , 0
-        elif winner == self.player2:
-            p1score, p2score = 0, 1
-        elif winner == None:
-            p1score, p2score = 0.5 , 0.5
-        self.isfinished = True
-        return ([self.player1, p1score], [self.player2, p2score])

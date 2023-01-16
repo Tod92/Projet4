@@ -1,3 +1,3 @@
-from Controller import Menucontroller
+from Controller import menucontroller
 
-Menucontroller.main()
+menucontroller.main()

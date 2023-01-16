@@ -27,3 +27,8 @@ def pick(liste,back = False):
 
 def user_input(question):
     return input("Saisir " + question + ":\n")
+
+@star_decorator
+def affiche(texte):
+    print(texte)
+    return None

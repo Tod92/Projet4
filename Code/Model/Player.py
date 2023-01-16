@@ -1,14 +1,14 @@
 import json, jsonpickle
 
-SAVE_PATH = "Data\Players.json"
+SAVE_PATH = "Players.json"
 
 
 class Player:
     """
-    id : Identifiant National d'Echec
+    chess_id : Identifiant National d'Echec
     """
-    def __init__(self,id,firstname,lastname,birth):
-        self.id = id
+    def __init__(self,chess_id,firstname,lastname,birth):
+        self.chess_id = chess_id
         self.firstname = firstname
         self.lastname = lastname
         self.birth = birth
@@ -53,7 +53,7 @@ def save_player(player_object):
     save_file(liste_joueurs)
 
 def main():
-    joueur = Player("42","toto","leduc","01/01/2023")
+    joueur = Player("42","toto","dupont","01/01/2023")
     save_player(joueur)
 
 if __name__ == '__main__':
