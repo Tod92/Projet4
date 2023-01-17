@@ -1,5 +1,6 @@
 from Model import tournament
 from View import userinterface
+from Controller import playercontroller
 
 
 START_DATE_WAIT_MSG = "En attente du démarrage du premier tour"
@@ -8,6 +9,8 @@ END_DATE_WAIT_MSG = "En attente de la fin du tournoi"
 MENU_MODIFICATION = ["Nom",
                      "Lieu",
                      "Description"]
+
+MENU_JOUEURS = ["Ajouter joueur au tournoi"]
 
 
 def tournament_creation():
@@ -18,7 +21,7 @@ def tournament_creation():
     start_date = START_DATE_WAIT_MSG
     end_date = END_DATE_WAIT_MSG
     turn_number = 0
-    players_list = []
+    players = []
     description = userinterface.user_input("Description du tournoi")
     newtournament = tournament.Tournament(id,
                                           name,
@@ -26,7 +29,7 @@ def tournament_creation():
                                           start_date,
                                           end_date,
                                           turn_number,
-                                          players_list,
+                                          players,
                                           description)
 
     is_saved = tournament.save_tournament(newtournament)
@@ -59,4 +62,35 @@ def tournament_modification(tournament_object):
         tournament_object.place = userinterface.user_input("Lieu du tournoi")
     elif choix == 2:
         tournament_object.description = userinterface.user_input("Description du tournoi")
+    tournament.save_tournament(tournament_object)
+
+
+def player_management(tournament_object):
+    """
+    Permet d'ajouter des joueurs au Tournoi
+    """
+    while True:
+        if len(tournament_object.players) == 0:
+            userinterface.affiche("Pas de joueurs associés au tournoi")
+        else:
+            for p in tournament_object.players:
+                userinterface.affiche(p)
+        choix = userinterface.pick(MENU_JOUEURS, back = True)
+        if choix == -1:
+            return None
+        elif choix == 0:
+            add_player_to_tournament(tournament_object)
+
+def add_player_to_tournament(tournament_object):
+    """
+    """
+    userinterface.affiche("Selectionner le joueur à ajouter au tournoi")
+    player = playercontroller.player_list()
+    if player == None:
+        return None
+    for p in tournament_object.players:
+        if p.chess_id == player.chess_id:
+            userinterface.affiche("Ajout impossible : identifiant deja present")
+            return None
+    tournament_object.players.append(player)
     tournament.save_tournament(tournament_object)

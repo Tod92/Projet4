@@ -6,7 +6,7 @@ class Tournament:
     """
     """
     def __init__(self, id, name, place, start_date, end_date, turn_number,
-                players_list, description, nb_turns = 4):
+                players, description, nb_turns = 4):
         self._id = id
         self.name = name
         self.place = place
@@ -14,7 +14,7 @@ class Tournament:
         self.end_date = end_date
         self.turn_number = turn_number
         self.turn_list = []
-        self.players_list = players_list
+        self.players = players
         self.description = description
         self.nb_turns = nb_turns
 
@@ -27,7 +27,7 @@ class Tournament:
         result += "Date de fin : " + self.end_date + "\n"
         result += "Nombre de tours : " + str(self.nb_turns) + "\n"
         result += "Tour actuel : " + str(self.turn_number) + "\n"
-        result += "Participants : " + str(self.players_list)
+        result += "Participants : " + str(self.players)
 
         return result
 
