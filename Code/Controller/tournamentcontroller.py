@@ -8,7 +8,8 @@ END_DATE_WAIT_MSG = "En attente de la fin du tournoi"
 
 MENU_MODIFICATION = ["Nom",
                      "Lieu",
-                     "Description"]
+                     "Description",
+                     "Nombre de tours"]
 
 MENU_JOUEURS = ["Ajouter joueur au tournoi"]
 
@@ -62,6 +63,8 @@ def tournament_modification(tournament_object):
         tournament_object.place = userinterface.user_input("Lieu du tournoi")
     elif choix == 2:
         tournament_object.description = userinterface.user_input("Description du tournoi")
+    elif choix == 3:
+        tournament_object.nb_turns = userinterface.user_input("Nombre de tours")
     tournament.save_tournament(tournament_object)
 
 

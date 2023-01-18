@@ -1,3 +1,8 @@
-from Controller import menucontroller
+#from Controller import menucontroller
 
-menucontroller.main()
+#menucontroller.main()
+
+
+
+if __name__ == "__main__":
+    main()

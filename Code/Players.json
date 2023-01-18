@@ -1,1 +1,1 @@
-"[{\"py/object\": \"Model.player.Player\", \"chess_id\": \"AB1234\", \"firstname\": \"t\", \"lastname\": \"t\", \"birth\": \"t\"}, {\"py/object\": \"Model.player.Player\", \"chess_id\": \"CD1234\", \"firstname\": \"a\", \"lastname\": \"a\", \"birth\": \"a\"}]"
+"[{\"py/object\": \"Model.player.Player\", \"chess_id\": \"AB1234\", \"firstname\": \"toto\", \"lastname\": \"t\", \"birth\": \"01012000\"}]"

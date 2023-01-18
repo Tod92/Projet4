@@ -14,7 +14,11 @@ class Player:
         self.birth = birth
 
     def __str__(self):
-        return self.firstname + "" + self.lastname + " né(e) le " + str(self.birth)
+        return self.firstname + " " + self.lastname + " né(e) le " + str(self.birth)
+
+    def __repr__(self):
+        return "(" + self.chess_id + ")" +self.firstname + " " + self.lastname
+
 
 #class Player_Manager:
 def load_file():
