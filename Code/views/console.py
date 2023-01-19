@@ -13,12 +13,12 @@ class ConsoleView:
         return modified
 
     @star_decorator
-    def show_user(text):
+    def show_user(self, text):
         print(text)
         return None
 
     @star_decorator
-    def prompt_choices(liste,back = False):
+    def prompt_choices(self, liste, back = False):
         """Fonction d'affichage du menu de choix en fonction de la liste en entrée.
         Renvoie l'index de l'element choisi.
         Si back : True, ajoute le choix retour qui renvoi -1
@@ -32,7 +32,8 @@ class ConsoleView:
             num += 1
         return int(input("Ton choix : ")) - 1
 
-    def user_input(question):
+    def user_input(self, question, type = "free"):
+        #Todo : verif types
         return input("Saisir " + question + ":\n")
 
     def gen_report(self, text):

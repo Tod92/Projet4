@@ -38,7 +38,7 @@ class JsonDatabase:
     def save_players(self, players):
             self.write_file(players, self.players_file_path)
     def save_tournaments(self, tournaments):
-            self.write_file(players, self.tournaments_file_path)
+            self.write_file(tournaments, self.tournaments_file_path)
 
 if __name__ == '__main__':
     main()

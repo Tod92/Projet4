@@ -1,17 +1,8 @@
-from Model import tournament
-from View import userinterface
-from Controller import playercontroller
+from models.tournament import Tournament
 
 
-START_DATE_WAIT_MSG = "En attente du démarrage du premier tour"
-END_DATE_WAIT_MSG = "En attente de la fin du tournoi"
-
-MENU_MODIFICATION = ["Nom",
-                     "Lieu",
-                     "Description",
-                     "Nombre de tours"]
-
-MENU_JOUEURS = ["Ajouter joueur au tournoi"]
+class TournamentsController:
+    pass
 
 
 def tournament_creation():
