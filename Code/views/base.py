@@ -12,7 +12,7 @@ class Views:
         choices : liste
         retourne l'indice -1 si retour choisi avec back:True
         """
-        return self.active_view.prompt_choices(choices, back = False)
+        return self.active_view.prompt_choices(choices, back)
 
     def show_user(self, text):
         self.active_view.show_user(text)

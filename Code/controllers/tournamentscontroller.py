@@ -2,60 +2,76 @@ from models.tournament import Tournament
 
 
 class TournamentsController:
-    pass
+    def __init__(self, tournaments, views):
+        self.tournaments = tournaments
+        self.views = views
+
+    def create_tournament(self):
+        #id détérminé par le nombre de tournois présents dans la liste
+        id = len(self.tournaments)
+        name = self.views.user_input("Nom du tournoi")
+        place = self.views.user_input("Lieu du tournoi")
+        start_date = self.views.user_input("Date de début")
+        end_date = self.views.user_input("Date de fin")
+        turn_number = 0
+        players = []
+        description = self.views.user_input("Description du tournoi")
+        newtournament = Tournament(id,
+                                  name,
+                                  place,
+                                  start_date,
+                                  end_date,
+                                  turn_number,
+                                  players,
+                                  description)
+
+        self.tournaments.append(newtournament)
+        return self.tournaments
+
+    def sort_start_date(self):
+        """
+        renvoi liste de tournois par ordre de date début
+        """
+        #Tri de la liste par date de demarrage
+        self.tournaments.sort(key = lambda x: x.start_date)
+        return self.tournaments
 
 
-def tournament_creation():
-    #id détérminé par le nombre de tournois présents dans le fichier json
-    id = len(tournament.load_file())
-    name = userinterface.user_input("Nom du tournoi")
-    place = userinterface.user_input("Lieu du tournoi")
-    start_date = START_DATE_WAIT_MSG
-    end_date = END_DATE_WAIT_MSG
-    turn_number = 0
-    players = []
-    description = userinterface.user_input("Description du tournoi")
-    newtournament = tournament.Tournament(id,
-                                          name,
-                                          place,
-                                          start_date,
-                                          end_date,
-                                          turn_number,
-                                          players,
-                                          description)
 
-    is_saved = tournament.save_tournament(newtournament)
-    return is_saved
 
-def tournament_list():
-    """
-    Liste les tournois par ordre de création,
-    renvoi l'objet tournament choisi ou None si retour
-    """
-    liste_tournois = tournament.load_file()
-    ##Tri de la liste par date de demarrage
-    #liste_tournois.sort(key = lambda x: x.start_date)
-    choix = userinterface.pick(liste_tournois, back = True)
-    if choix == -1:
-        return None
-    return liste_tournois[choix]
-
+    def list_tournaments_choice(self):
+        """
+        Menu de choix parmis liste des tournois et renvoi vers
+        manage_tournaments du joueur choisi
+        """
+        if self.tournaments == []:
+            self.views.show_user("Liste tournois vide")
+            return self.tournaments
+        self.tournaments = self.sort_start_date()
+        choice = self.views.prompt_choices(self.tournaments, back = True)
+        if choice == -1:
+            return self.tournaments
+        else:
+            tournament = self.tournaments.pop(choice)
+            modified_tournament = self.manage_tournament(tournament)
+            self.tournaments.append(modified_tournament)
+            return self.tournaments
 
 def tournament_modification(tournament_object):
     """
     Affiche et permet de choisir l'element modifiable par l'utilisateur
     """
-    choix = userinterface.pick(MENU_MODIFICATION, back = True)
+    choix = self.views.pick(MENU_MODIFICATION, back = True)
     if choix == -1:
         return None
     elif choix == 0:
-        tournament_object.name = userinterface.user_input("Nom du tournoi")
+        tournament_object.name = self.views.user_input("Nom du tournoi")
     elif choix == 1:
-        tournament_object.place = userinterface.user_input("Lieu du tournoi")
+        tournament_object.place = self.views.user_input("Lieu du tournoi")
     elif choix == 2:
-        tournament_object.description = userinterface.user_input("Description du tournoi")
+        tournament_object.description = self.views.user_input("Description du tournoi")
     elif choix == 3:
-        tournament_object.nb_turns = userinterface.user_input("Nombre de tours")
+        tournament_object.nb_turns = self.views.user_input("Nombre de tours")
     tournament.save_tournament(tournament_object)
 
 
@@ -65,11 +81,11 @@ def player_management(tournament_object):
     """
     while True:
         if len(tournament_object.players) == 0:
-            userinterface.affiche("Pas de joueurs associés au tournoi")
+            self.views.affiche("Pas de joueurs associés au tournoi")
         else:
             for p in tournament_object.players:
-                userinterface.affiche(p)
-        choix = userinterface.pick(MENU_JOUEURS, back = True)
+                self.views.affiche(p)
+        choix = self.views.pick(MENU_JOUEURS, back = True)
         if choix == -1:
             return None
         elif choix == 0:
@@ -78,13 +94,13 @@ def player_management(tournament_object):
 def add_player_to_tournament(tournament_object):
     """
     """
-    userinterface.affiche("Selectionner le joueur à ajouter au tournoi")
+    self.views.affiche("Selectionner le joueur à ajouter au tournoi")
     player = playercontroller.player_list()
     if player == None:
         return None
     for p in tournament_object.players:
         if p.chess_id == player.chess_id:
-            userinterface.affiche("Ajout impossible : identifiant deja present")
+            self.views.affiche("Ajout impossible : identifiant deja present")
             return None
     tournament_object.players.append(player)
     tournament.save_tournament(tournament_object)
