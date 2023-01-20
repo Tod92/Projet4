@@ -9,3 +9,9 @@ class Menus:
 
     tournaments_management = ["Nouveau Tournoi",
                               "Liste tournois"]
+
+    tournaments_modification = ["Nom",
+                                "Lieu",
+                                "Description",
+                                "Nombre de tours",
+                                "Ajouter joueur au tournoi"]

@@ -2,8 +2,9 @@ from models.player import Player
 
 
 class PlayersController:
-    def __init__(self, players, views):
+    def __init__(self, players, menus, views):
         self.players = players
+        self.menus = menus
         self.views = views
 
 

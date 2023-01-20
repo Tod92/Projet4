@@ -30,7 +30,7 @@ class Controller:
     def init_players_menu(self):
         while True:
             players = self.database.get_players()
-            playerscontroller = PlayersController(players, self.views)
+            playerscontroller = PlayersController(players, self.menus, self.views)
             choice = self.views.prompt_choices(self.menus.players_management, back = True)
             #choix retour
             if choice == -1:
@@ -46,8 +46,9 @@ class Controller:
 
     def init_tournaments_menu(self):
         while True:
-            tournaments = self.database.get_tournaments()
-            tournamentscontroller = TournamentsController(tournaments, self.views)
+            tournamentscontroller = TournamentsController(self.database,
+                                                          self.menus,
+                                                          self.views)
             choice = self.views.prompt_choices(self.menus.tournaments_management,
                                                back = True)
             #choix retour
@@ -55,12 +56,11 @@ class Controller:
                 return None
             #creation tournoi
             elif choice == 0:
-                newtournaments = tournamentscontroller.create_tournament()
-                self.database.save_tournaments(newtournaments)
+                tournamentscontroller.create_tournament()
             #liste tournois
             elif choice == 1:
-                newtournaments = tournamentscontroller.list_tournaments_choice()
-                self.database.save_tournaments(newtournaments)
+                tournamentscontroller.list_tournaments_choice()
+
 
     def init_report_menu(self):
         pass
