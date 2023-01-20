@@ -69,19 +69,3 @@ class Controller:
         running = True
         while running:
             running = self.init_main_menu()
-
-
-# from Model import tournament
-# from View import userinterface
-# from Controller import playercontroller
-
-
-# START_DATE_WAIT_MSG = "En attente du démarrage du premier tour"
-# END_DATE_WAIT_MSG = "En attente de la fin du tournoi"
-#
-# MENU_MODIFICATION = ["Nom",
-#                      "Lieu",
-#                      "Description",
-#                      "Nombre de tours"]
-#
-# MENU_JOUEURS = ["Ajouter joueur au tournoi"]
