@@ -1,6 +1,6 @@
 from controllers.playerscontroller import PlayersController
 from controllers.tournamentscontroller import TournamentsController
-
+from controllers.gamecontroller import GameController
 
 class Controller:
     """
@@ -13,7 +13,6 @@ class Controller:
         self.views = views
 
     def init_main_menu(self):
-
         choice = self.views.prompt_choices(self.menus.main)
         if choice == 0:
             self.init_play_menu()
@@ -43,6 +42,9 @@ class Controller:
             if choice == -1:
                 return None
             else:
+                if tournaments[choice].is_playable() == False:
+                    print("TOURNOI NON JOUABLE")
+                    return None
                 tournament_id = tournaments[choice]._id
                 self.game(tournament_id)
 
