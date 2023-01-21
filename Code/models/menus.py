@@ -1,5 +1,6 @@
 class Menus:
-    main = ["Gestion Joueurs",
+    main = ["Jouer Tournoi",
+            "Gestion Joueurs",
             "Gestion Tournois",
             "Rapports",
             "Quitter"]
@@ -15,3 +16,6 @@ class Menus:
                                 "Description",
                                 "Nombre de tours",
                                 "Ajouter joueur au tournoi"]
+
+    choose_tournament = "Choisir le tournoi à jouer"
+    tournaments_empty = "Liste de tournois vide"

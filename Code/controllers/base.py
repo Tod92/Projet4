@@ -5,7 +5,7 @@ from controllers.tournamentscontroller import TournamentsController
 class Controller:
     """
     Main controller
-    Seul ce controller apelle database, pas les controllers de niveau inferieur
+    Gere le menu principal et premiers sous menus
     """
     def __init__(self, database, menus, views):
         self.database = database
@@ -16,15 +16,35 @@ class Controller:
 
         choice = self.views.prompt_choices(self.menus.main)
         if choice == 0:
-            self.init_players_menu()
+            self.init_play_menu()
         elif choice == 1:
-            self.init_tournaments_menu()
+            self.init_players_menu()
         elif choice == 2:
+            self.init_tournaments_menu()
+        elif choice == 3:
             self.init_report_menu()
         #To quit
-        elif choice == 3:
+        elif choice == 4:
             return False
         return True
+
+    def init_play_menu(self):
+        while True:
+            tournamentscontroller = TournamentsController(self.database,
+                                                          self.menus,
+                                                          self.views)
+            tournaments = tournamentscontroller.list_tournaments()
+            if tournaments == None:
+                return None
+            self.views.show_user(self.menus.choose_tournament)
+            choice = self.views.prompt_choices(tournaments,
+                                               back = True)
+            #choix retour
+            if choice == -1:
+                return None
+            else:
+                tournament_id = tournaments[choice]._id
+                self.game(tournament_id)
 
 
     def init_players_menu(self):
@@ -64,6 +84,13 @@ class Controller:
 
     def init_report_menu(self):
         pass
+
+    def game(self,tournament_id):
+        gamecontroller = GameController(self.database,
+                                        self.menus,
+                                        self.views,
+                                        tournament_id)
+        gamecontroller.run()
 
     def run(self):
         running = True

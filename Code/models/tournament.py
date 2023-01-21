@@ -1,6 +1,3 @@
-import json, jsonpickle
-
-SAVE_PATH = "Tournaments.json"
 
 class Tournament:
     """
@@ -17,6 +14,9 @@ class Tournament:
         self.players = players
         self.description = description
         self.nb_turns = nb_turns
+        self.is_started = False
+        self.is_finished = False
+
 
     def __str__(self):
         result = "Tournoi (id :" + str(self._id) + ")\n"
@@ -31,43 +31,17 @@ class Tournament:
 
         return result
 
-
-def load_file():
-    """
-    Fonction qui ouvre le fichier de sauvegarde SAVE_PATH et retourne la liste
-    de tournois
-    Si l'ouverture du fichier ne fonctionne pas, écrit fichier avec liste vierge
-    """
-    try:
-        with open(SAVE_PATH, 'r') as file:
-            json_liste_tournois = json.load(file)
-        liste_tournois = jsonpickle.decode(json_liste_tournois)
-    except:
-        liste_tournois = []
-        json_liste_tournois = jsonpickle.encode(liste_tournois)
-        with open(SAVE_PATH, 'w') as file:
-            json.dump(json_liste_tournois, file)
-        print("enregistrement ok")
-
-    return liste_tournois
-
-def save_file(liste_tournois):
-    """
-    Fonction qui va serialiser la liste de joueurs en JSON puis écrire le
-    fichier dans SAVE_PATH
-    """
-    json_liste_tournois = jsonpickle.encode(liste_tournois)
-    with open(SAVE_PATH, 'w') as file:
-        json.dump(json_liste_tournois, file)
-        print("enregistrement ok")
-    return True
-
-def save_tournament(tournament_object):
-    liste_tournois = load_file()
-    #suppression du tournois à remplacer avec même id
-    for i in range(len(liste_tournois)):
-        if liste_tournois[i]._id == tournament_object._id:
-            liste_tournois.pop(i)
-            break
-    liste_tournois.append(tournament_object)
-    save_file(liste_tournois)
+    def is_playable(self):
+        """
+        renvoie True si les conditions sont remplies pour pouvoir jouer
+        le tournoi : non terminé, liste joueurs non vide et pair
+        """
+        #TODO : gestion exceptions pour remonter la raison du unplayable
+        if self.is_finished == True:
+            return False
+        elif self.players == []:
+            return False
+        elif (len(self.players)%2) != 0:
+            return False
+        else:
+            return True

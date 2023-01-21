@@ -23,6 +23,7 @@ class TournamentsController:
     def create_tournament(self):
         self.load_tournaments()
         #id détérminé par le nombre de tournois présents dans la liste
+        #à modifier si introduction de la suppression tournoi
         id = len(self.tournaments)
         name = self.views.user_input("Nom du tournoi")
         place = self.views.user_input("Lieu du tournoi")
@@ -50,16 +51,25 @@ class TournamentsController:
         #Tri de la liste par date de demarrage
         self.tournaments.sort(key = lambda x: x.start_date)
 
+    def list_tournaments(self):
+        """
+        renvoi la liste des tournois depuis database, tirée par date de départ
+        ou indique aux vues que la liste est vide
+        """
+        self.load_tournaments()
+        if self.tournaments == []:
+            self.views.show_user(self.menus.tournaments_empty)
+            return None
+        self.sort_start_date()
+        #return utilisé car fonction apellée par autre controller
+        return self.tournaments
+
     def list_tournaments_choice(self):
         """
         Menu de choix parmis liste des tournois et renvoi vers
         manage_tournaments du joueur choisi
         """
-        self.load_tournaments()
-        if self.tournaments == []:
-            self.views.show_user("Liste tournois vide")
-            return None
-        self.sort_start_date()
+        self.list_tournaments()
         choice = self.views.prompt_choices(self.tournaments, back = True)
         if choice == -1:
             return None
