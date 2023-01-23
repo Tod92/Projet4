@@ -16,6 +16,10 @@ class Menus:
                                 "Description",
                                 "Nombre de tours",
                                 "Ajouter joueur au tournoi"]
-
+    first_start = ["Demarrer le tournoi en générant le premier tour",
+                   "Quitter"]
     choose_tournament = "Choisir le tournoi à jouer"
     tournaments_empty = "Liste de tournois vide"
+    turn_not_started = "Tour non démarré"
+    started_matchs = "Matchs en cours : "
+    finished_matchs = "Matchs terminés : "
