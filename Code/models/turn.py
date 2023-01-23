@@ -9,6 +9,7 @@ class Turn:
         self.name = name
         self.is_finished = False
         self.start_time = "TODO"
+        self.end_time = "TODO"
         self.matchs = self.gen_matchs(players_points_dict)
 
     def __str__(self):
@@ -40,7 +41,7 @@ class Turn:
             if type(e) != tuple:
                 return False
         self.is_finished = True
-        return self
+        return True
 
 
 if __name__ == '__main__':

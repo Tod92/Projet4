@@ -42,7 +42,6 @@ class GameController:
         derniere
         """
         self.tournaments.append(self.tournament)
-        print("Jenvoie ca a save_tournaments : ", self.tournaments)
         self.save_tournaments()
         #suppression du tournoi de la liste après avoir sauvegardé la liste
         self.tournaments.pop()
@@ -79,18 +78,64 @@ class GameController:
             self.tournament.gen_next_turn(name)
 
         elif choice == 1:
-            print("quand meme !")
             return None
 
-    def menu_gen_turn(self):
+    def set_winner(self, match_index):
+        """
+        l'indice du match dans la liste matchs en entrée
+        """
+        match = self.tournament.turns[-1].matchs[match_index]
+        player1 = match.player1
+        player2 = match.player2
+        temp_menu = [player1,player2]
+        temp_menu.append(self.menus.draw)
+        self.views.show_user(self.menus.pick_winner)
+        choice = self.views.prompt_choices(temp_menu, back = True)
+        #Retour
+        if choice == -1:
+            return None
+        #Vainqueur = joueur 1
+        elif choice == 0:
+            p1score, p2score = WINNER_POINTS , 0
+        #Vainqueur = joueur 2
+        elif choice == 1:
+            p1score, p2score = 0, WINNER_POINTS
+        #match nul
+        elif choice == 2:
+            p1score, p2score = DRAW_POINTS , DRAW_POINTS
+        result = ([match.player1, p1score], [match.player2, p2score])
+        self.tournament.turns[-1].matchs.pop(match_index)
+        self.tournament.turns[-1].matchs.append(result)
+
+
+    def menu_active_turn(self):
         """
         """
-        print(self.tournament)
-        print(self.tournaments)
-        print(self.tournament.turns)
-        print(self.tournament.turns[0].name)
-        print(self.tournament.turns[0].matchs)
-        exit()
+        turn = self.tournament.turns[self.tournament.turn_number - 1]
+        choice = self.views.prompt_choices(self.menus.active_turn)
+        #Saisir le resultat d'un match
+        if choice == 0:
+            while True:
+                started_matchs = [e for e in turn.matchs if type(e) != tuple]
+                choice = self.views.prompt_choices(started_matchs, back = True)
+                if choice == -1:
+                    return None
+                self.set_winner(choice)
+                return None
+        #Terminer le tour
+        if choice == 1:
+            if turn.closing():
+                #TODO : remonter les scores du tour vers le tournoi
+                pass
+        #Quitter
+        elif choice == 2:
+            return None
+        # print(self.tournament)
+        # print(self.tournaments)
+        # print(self.tournament.turns)
+        # print(self.tournament.turns[0].name)
+        # print(self.tournament.turns[0].matchs)
+        # exit()
 
 
     def run(self):
@@ -106,7 +151,7 @@ class GameController:
             if self.tournament.turn_number == 0:
                 self.menu_first_start()
             else:
-                self.menu_gen_turn()
+                self.menu_active_turn()
 
             self.save_tournament()
 
