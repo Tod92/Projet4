@@ -106,7 +106,38 @@ class GameController:
         result = ([match.player1, p1score], [match.player2, p2score])
         self.tournament.turns[-1].matchs.pop(match_index)
         self.tournament.turns[-1].matchs.append(result)
+        #mise à jour des Scores
+        self.update_turn_scores()
 
+    def init_scores(self):
+        return {p: 0 for p in self.tournament.players}
+
+    def update_turn_scores(self, turn_number = "current"):
+        """
+        la methode parcours les resultats des matchs terminés pour reconstruire
+        le dictionnaire scores du tour souhaité
+        turn_number pour appliquer sur le tour souhaité
+        """
+        if turn_number == "current":
+            turn_number = self.tournament.turn_number
+        turn = self.tournament.turns[turn_number - 1]
+        turn.scores = self.init_scores()
+        finished_matchs = [e for e in turn.matchs if type(e) == tuple]
+        for m in turn.matchs:
+            for e in m:
+                player = e[0]
+                score = e[1]
+                if score != 0:
+                    turn.scores[player] += score
+        self.update_tournament_scores()
+
+    def update_tournament_scores(self):
+        """la methode reconstruit le dictionnaire scores du tournois # -*- coding: utf-8 -*-
+        faisant la somme de ceux de ses tours """
+        self.tournament.scores = self.init_scores()
+        for t in self.tournament.turns:
+            for p in self.tournament.players:
+                self.tournament.scores[p] += t.scores[p]
 
     def menu_active_turn(self):
         """
@@ -124,18 +155,13 @@ class GameController:
                 return None
         #Terminer le tour
         if choice == 1:
-            if turn.closing():
-                #TODO : remonter les scores du tour vers le tournoi
-                pass
+            #demande au tour de se cloturer s'il le peut
+            if turn.closing() == False:
+                self.views
+                pass #indiquer cloture impossible matchs non terminés
         #Quitter
         elif choice == 2:
             return None
-        # print(self.tournament)
-        # print(self.tournaments)
-        # print(self.tournament.turns)
-        # print(self.tournament.turns[0].name)
-        # print(self.tournament.turns[0].matchs)
-        # exit()
 
 
     def run(self):

@@ -11,6 +11,7 @@ class Turn:
         self.start_time = "TODO"
         self.end_time = "TODO"
         self.matchs = self.gen_matchs(players_points_dict)
+        self.scores = {}
 
     def __str__(self):
         return self.name + " : " + str(self.matchs)
@@ -37,7 +38,7 @@ class Turn:
         Doit verifier que tous les matchs de matchs sont réalisés cad ne
         sont plus sous la forme objet Match() mais tuple
         """
-        for e in matchs:
+        for e in self.matchs:
             if type(e) != tuple:
                 return False
         self.is_finished = True
