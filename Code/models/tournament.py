@@ -18,7 +18,6 @@ class Tournament:
         self.scores = {}
         self.description = description
         self.nb_turns = nb_turns
-        self.turn_started = False
         self.is_finished = False
 
 

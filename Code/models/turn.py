@@ -7,6 +7,7 @@ class Turn:
     def __init__(self, name, players_points_dict):
         #players_points_dict doit etre un dict tuples contenant joueur et score
         self.name = name
+        self.is_started = False
         self.is_finished = False
         self.start_time = "TODO"
         self.end_time = "TODO"
@@ -31,6 +32,13 @@ class Turn:
             matchs += [Match(player1, player2)]
 
         return matchs
+
+    def start(self):
+        """
+        """
+        self.is_started = True
+        #remplir startdate
+        return True
 
     def closing(self):
         """

@@ -16,12 +16,15 @@ class Menus:
                                 "Description",
                                 "Nombre de tours",
                                 "Ajouter joueur au tournoi"]
-    first_start = ["Demarrer le tournoi (verrouillage liste participants)",
+    start_turn = ["Demarrer tour (demarrage des matchs)",
+                   "Quitter"]
+    gen_turn = ["Generer nouveau tour (verrouillage liste participants)",
                    "Quitter"]
     active_turn = ["Saisir le résultat d'un match",
                     "Terminer le tour",
                     "Quitter"]
     draw = "Match nul"
+    cant_close_turn = "Cloture du tour impossble. Match(s) en cours"
     pick_winner = "Selectionner le vainqueur du match : "
     choose_tournament = "Choisir le tournoi à jouer"
     tournaments_empty = "Liste de tournois vide"
