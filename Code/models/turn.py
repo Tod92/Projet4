@@ -17,18 +17,19 @@ class Turn:
     def __str__(self):
         return self.name + " : " + str(self.matchs)
 
-
+# a remonter côté controller
     def gen_matchs(self, players_points_dict):
-        #Tri de la liste de tuples du plus gros score au plus petit
+        #Tri du dictionnaire du plus gros score au plus petit
         liste_triee = sorted(players_points_dict.items(),
                             key=lambda x: x[1],reverse = True)
         #On ne garde que les joueurs dans la liste désormais triée
         liste_triee = [e[0] for e in liste_triee]
-
+        print("liste_triee dans gen_matchs" + str(liste_triee))
         matchs = []
         for i in range(len(liste_triee)//2):
             player1 = liste_triee.pop(0)
             player2 = liste_triee.pop(0)
+            print("type player1 dans gen_matchs " + str(type(player1)))
             matchs += [Match(player1, player2)]
 
         return matchs

@@ -14,6 +14,3 @@ class Player:
 
     def __repr__(self):
         return "(" + self.chess_id + ")" +self.firstname + " " + self.lastname
-
-
-#class Player_Manager:

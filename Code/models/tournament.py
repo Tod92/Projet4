@@ -39,7 +39,7 @@ class Tournament:
         """
         """
         if self.turn_number == 0:
-            self.scores = {p: 0 for p in self.players}
+            self.scores = {p.chess_id: 0 for p in self.players}
         turn = Turn(turn_name, self.scores)
         self.turns.append(turn)
         self.turn_number += 1

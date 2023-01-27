@@ -1,6 +1,7 @@
 from controllers.playerscontroller import PlayersController
 from controllers.tournamentscontroller import TournamentsController
 from controllers.gamecontroller import GameController
+from controllers.reportscontroller import ReportsController
 
 class Controller:
     """
@@ -85,7 +86,10 @@ class Controller:
 
 
     def init_report_menu(self):
-        pass
+        reportscontroller = ReportsController(self.database,
+                                        self.menus,
+                                        self.views)
+        reportscontroller.run()
 
     def game(self,tournament_id):
         gamecontroller = GameController(self.database,

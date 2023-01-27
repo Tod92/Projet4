@@ -57,6 +57,7 @@ class GameController:
             started_matchs = [e for e in turn.matchs if type(e) != tuple]
             finished_matchs = [e for e in turn.matchs if type(e) == tuple]
             turn_details += self.menus.started_matchs + str(started_matchs)
+            turn_details += "\n"
             turn_details += self.menus.finished_matchs + str(finished_matchs)
         else:
             turn_details = self.menus.turn_not_started
@@ -71,9 +72,11 @@ class GameController:
         l'indice du match dans la liste matchs en entrée
         """
         match = self.tournament.turns[-1].matchs[match_index]
+        print(match)
+        print(type(match.player1))
         player1 = match.player1
         player2 = match.player2
-        temp_menu = [player1,player2]
+        temp_menu = [player1, player2]
         temp_menu.append(self.menus.draw)
         self.views.show_user(self.menus.pick_winner)
         choice = self.views.prompt_choices(temp_menu, back = True)
@@ -90,13 +93,15 @@ class GameController:
         elif choice == 2:
             p1score, p2score = DRAW_POINTS , DRAW_POINTS
         result = ([match.player1, p1score], [match.player2, p2score])
+        print(result)
         self.tournament.turns[-1].matchs.pop(match_index)
         self.tournament.turns[-1].matchs.append(result)
+        print("tournament.turns[-1].matchs : " + str(self.tournament.turns[-1].matchs))
         #mise à jour des Scores
         self.update_turn_scores()
 
     def init_scores(self):
-        return {p: 0 for p in self.tournament.players}
+        return {p.chess_id: 0 for p in self.tournament.players}
 
     def update_turn_scores(self, turn_number = "current"):
         """
@@ -112,19 +117,19 @@ class GameController:
             #Condition pour atteindre les matchs terminés uniquement
             if type(m) == tuple:
                 for e in m:
-                    player = e[0]
+                    chess_id = e[0]
                     score = e[1]
                     if score != 0:
-                        turn.scores[player] += score
+                        turn.scores[chess_id] += score
         self.update_tournament_scores()
 
     def update_tournament_scores(self):
-        """la methode reconstruit le dictionnaire scores du tournois # -*- coding: utf-8 -*-
+        """la methode reconstruit le dictionnaire scores du tournois en
         faisant la somme de ceux de ses tours """
         self.tournament.scores = self.init_scores()
         for t in self.tournament.turns:
             for p in self.tournament.players:
-                self.tournament.scores[p] += t.scores[p]
+                self.tournament.scores[p.chess_id] += t.scores[p.chess_id]
 
     def menu_start_turn(self):
         """
@@ -134,7 +139,8 @@ class GameController:
             self.tournament.turns[-1].start()
 
         elif choice == 1:
-            return None
+            exit = True
+            return exit
 
     def menu_active_turn(self):
         """
@@ -159,10 +165,12 @@ class GameController:
             #demande au tour de se cloturer s'il le peut
             if turn.closing() == False:
                 self.views.show_user(self.menus.cant_close_turn)
-
+            elif self.tournament.turn_number == self.tournament.nb_turns:
+                self.tournament.is_finished = True
         #Quitter
         elif choice == 2:
-            return None
+            exit = True
+            return exit
 
     def menu_gen_turn(self):
         """
@@ -173,13 +181,15 @@ class GameController:
             self.tournament.gen_next_turn(name)
 
         elif choice == 1:
-            return None
+            exit = True
+            return exit
 
     def run(self):
         self.load_tournaments()
         self.tournament = self.extract_tournament_from_list()
 
         while True:
+            exit = False
             if self.tournament.is_finished == True:
                 #TODO : indiquer tournoi terminé
                 return None
@@ -187,17 +197,19 @@ class GameController:
             self.show_turn_details()
             turn_number = self.tournament.turn_number
             if turn_number == 0:
-                self.menu_start_turn()
+                self.menu_gen_turn()
             else:
                 turn = self.tournament.turns[turn_number - 1]
-                if turn.is_started == False and turn.is_finished == False:
-                    self.menu_start_turn()
-                elif turn.is_started == True and turn.is_finished == False:
-                    self.menu_active_turn()
-                elif turn.is_started == True and turn.is_finished == True:
-                    self.menu_gen_turn()
-            self.save_tournament()
 
+                if turn.is_started == False and turn.is_finished == False:
+                    exit = self.menu_start_turn()
+                elif turn.is_started == True and turn.is_finished == False:
+                    exit = self.menu_active_turn()
+                elif turn.is_started == True and turn.is_finished == True:
+                    exit = self.menu_gen_turn()
+            self.save_tournament()
+            if exit == True:
+                return None
 
 
 

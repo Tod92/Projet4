@@ -70,14 +70,17 @@ class TournamentsController:
         manage_tournaments du joueur choisi
         """
         self.list_tournaments()
-        choice = self.views.prompt_choices(self.tournaments, back = True)
-        if choice == -1:
+        if self.tournaments == []:
             return None
-        else:
-            tournament = self.tournaments.pop(choice)
-            modified_tournament = self.manage_tournament(tournament)
-            self.tournaments.append(modified_tournament)
-            self.save_tournaments()
+        while True:
+            choice = self.views.prompt_choices(self.tournaments, back = True)
+            if choice == -1:
+                return None
+            else:
+                tournament = self.tournaments.pop(choice)
+                modified_tournament = self.manage_tournament(tournament)
+                self.tournaments.append(modified_tournament)
+                self.save_tournaments()
 
 
     def manage_tournament(self, tournament_object):
@@ -98,14 +101,20 @@ class TournamentsController:
         #choix description
         elif choice == 2:
             tournament_object.description = self.views.user_input("Description du tournoi")
-        #choix nombre de tour
+        #choix date de début
         elif choice == 3:
+            tournament_object.start_date = self.views.user_input("Date de début")
+        #choix date de fin
+        elif choice == 4:
+            tournament_object.end_date = self.views.user_input("Date de fin")
+        #choix nombre de tour
+        elif choice == 5:
             #nombre de tours non modifiable si tournoi démarré
             if tournament_object.turn_number != 0:
                 self.views.show_user("Nombre de tours non modifiable. Tournoi démarré")
                 return tournament_object
             tournament_object.nb_turns = self.views.user_input("Nombre de tours")
-        elif choice == 4:
+        elif choice == 6:
             tournament_object = self.add_player_to_tournament(tournament_object)
 
         return tournament_object
