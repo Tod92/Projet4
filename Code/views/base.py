@@ -23,4 +23,4 @@ class Views:
 
     def gen_report(self, text):
         for view in self.views:
-            views.gen_report(text)
+            view.gen_report(text)
