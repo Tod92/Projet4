@@ -72,8 +72,6 @@ class GameController:
         l'indice du match dans la liste matchs en entrée
         """
         match = self.tournament.turns[-1].matchs[match_index]
-        print(match)
-        print(type(match.player1))
         player1 = match.player1
         player2 = match.player2
         temp_menu = [player1, player2]
@@ -93,10 +91,8 @@ class GameController:
         elif choice == 2:
             p1score, p2score = DRAW_POINTS , DRAW_POINTS
         result = ([match.player1, p1score], [match.player2, p2score])
-        print(result)
         self.tournament.turns[-1].matchs.pop(match_index)
         self.tournament.turns[-1].matchs.append(result)
-        print("tournament.turns[-1].matchs : " + str(self.tournament.turns[-1].matchs))
         #mise à jour des Scores
         self.update_turn_scores()
 

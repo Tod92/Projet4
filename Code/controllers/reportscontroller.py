@@ -63,6 +63,26 @@ class ReportsController:
             report += str(player.firstname) + "\n"
         self.views.gen_report(report)
 
+    def all_turns_and_matchs(self):
+            tournaments = self.database.get_tournaments()
+            tournament = self.pick_tournament(tournaments)
+            report = ""
+            for turn in tournament.turns:
+                 report += str(turn.name) + ": \n"
+                 for m in turn.matchs:
+                     if type(m) == tuple:
+                         p1_name = m[0][0]
+                         p1_score = m[0][1]
+                         p2_name = m[1][0]
+                         p2_score = m[1][1]
+                         report += str(p1_name) + " : "
+                         report += str(p1_score) + " / "
+                         report += str(p1_name) + " : "
+                         report += str(p1_score) + "\n"
+                     else:
+                         report += str(m) + "\n"
+            self.views.gen_report(report)
+
     def run(self):
         while True:
             choice = self.views.prompt_choices(self.menus.reports, back = True)
@@ -83,7 +103,7 @@ class ReportsController:
                 self.tournaments_players_alpha()
             #Liste de tous les tours du tournoi et de tous les matchs du tour
             elif choice == 4:
-                pass
+                self.all_turns_and_matchs()
 
 
 if __name__ == '__main__':
