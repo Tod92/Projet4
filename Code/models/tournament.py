@@ -19,6 +19,7 @@ class Tournament:
         self.description = description
         self.nb_turns = nb_turns
         self.is_finished = False
+        self.encounters = []
 
 
     def __str__(self):

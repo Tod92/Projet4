@@ -10,7 +10,12 @@ class Player:
         self.birth = birth
 
     def __str__(self):
-        return self.firstname + " " + self.lastname + " né(e) le " + str(self.birth)
+        result = "(" + self.chess_id + ")"
+        result += self.firstname + " " + self.lastname
+        return  result
 
     def __repr__(self):
-        return "(" + self.chess_id + ")" +self.firstname + " " + self.lastname
+        result = "(" + self.chess_id + ")"
+        result += self.firstname + " " + self.lastname + " "
+        result += "né(e) le : " + self.birth
+        return  result

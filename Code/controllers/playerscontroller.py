@@ -24,14 +24,27 @@ class PlayersController:
             return False
         return True
 
+    def chess_id_in_players(self, chess_id):
+        """
+        returns True if player chess id found in self.players
+        """
+        for p in self.players:
+            if p.chess_id == chess_id:
+                return True
+        return False
+
     def create_player(self):
         while True:
             chess_id = self.views.user_input("Identifiant National d'Echec")
+            #verification du format "AB1234"
             if self.is_chess_id_format(chess_id):
-                break
+                #verification de doublon de chess_id
+                if self.chess_id_in_players(chess_id) == False:
+                        break
+                else:
+                    self.views.show_user("Identifiant déja présent")
             else:
                 self.views.show_user("Erreur de format de l'identiant. ")
-        #TODO : verification que l'id n'est pas deja en base
         firstname = self.views.user_input("Prénom")
         lastname = self.views.user_input("Nom")
         birth = self.views.user_input("Date de naissance")
@@ -66,6 +79,19 @@ class PlayersController:
         return self.players
 
     def manage_player(self, player):
-        self.views.show_user(player)
-        #TODO : menu pour modifier les infos du joueur SAUF ID
+        self.views.show_user(repr(player))
+        menu = self.menus.players_modification
+        choice = self.views.prompt_choices(menu, back = True)
+        #Retour
+        if choice == -1:
+            return player
+        #Prenom
+        elif choice == 0:
+            player.firstname = self.views.user_input("Prenom")
+        #Nom
+        elif choice == 0:
+            player.lastname = self.views.user_input("Nom")
+        #Date de naissance
+        elif choice == 0:
+            player.birth = self.views.user_input("Date de naissance")            
         return player

@@ -8,6 +8,10 @@ class Menus:
     players_management = ["Nouveau joueur",
                           "Liste joueurs"]
 
+    players_modification = ["Prenom",
+                            "Nom",
+                            "Date de naissance"]
+
     tournaments_management = ["Nouveau Tournoi",
                               "Liste tournois"]
 

@@ -17,7 +17,6 @@ class Turn:
     def __str__(self):
         return self.name + " : " + str(self.matchs)
 
-# a remonter côté controller
     def gen_matchs(self, players_points_dict):
         #Tri du dictionnaire du plus gros score au plus petit
         liste_triee = sorted(players_points_dict.items(),
