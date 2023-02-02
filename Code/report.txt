@@ -1,6 +1,1 @@
-Round1: 
-po1234 : 0.5 / po1234 : 0.5
-AB1234 : 0 / AB1234 : 0
-Round2: 
-Match : BC2334 contre po1234
-RT4342 : 1 / RT4342 : 1
+(AB1234) titi titi

@@ -33,8 +33,25 @@ class ConsoleView:
         return int(input("Ton choix : ")) - 1
 
     def user_input(self, question, type = "free"):
-        #Todo : verif types
-        return input("Saisir " + question + ":\n")
+        while True:
+            result = input("Saisir " + question + ":\n")
+            if type =="free":
+                return result
+            elif type == "int":
+                try:
+                    result = int(result)
+                    return result
+                except ValueError:
+                    print("Erreur : un chiffre est attendu")
+            elif type == "str":
+                try:
+                    result = str(result)
+                    return result
+                except ValueError:
+                    print("Erreur : du texte est attendu")
+
+
+
 
     def gen_report(self, text):
         print("GENERATION RAPPORT :")

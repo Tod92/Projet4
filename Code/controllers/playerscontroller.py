@@ -7,11 +7,30 @@ class PlayersController:
         self.menus = menus
         self.views = views
 
-
+    def is_chess_id_format(self, chess_id):
+        if len(chess_id) != 6:
+            return False
+        start = chess_id[:2]
+        try:
+            str(start)
+        except ValueError:
+            return False
+        if start.isupper() == False:
+            return False
+        end = chess_id[2:]
+        try:
+            int(end)
+        except ValueError:
+            return False
+        return True
 
     def create_player(self):
-
-        chess_id = self.views.user_input("Identifiant National d'Echec")
+        while True:
+            chess_id = self.views.user_input("Identifiant National d'Echec")
+            if self.is_chess_id_format(chess_id):
+                break
+            else:
+                self.views.show_user("Erreur de format de l'identiant. ")
         #TODO : verification que l'id n'est pas deja en base
         firstname = self.views.user_input("Prénom")
         lastname = self.views.user_input("Nom")
