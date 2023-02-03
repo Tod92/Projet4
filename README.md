@@ -43,6 +43,12 @@ https://github.com/Tod92/Projet4
 * Penser à désactiver l'environnement virtuel :\
   `deactivate`
 
+## Générer les rapports flake8-html
+
+* Se positionner dans le répertoire "Code" :\
+  `flake8 --format=html --htmldir=flake8_rapport --max-line-length=119`
+
+
 ## Précisions
 
 L'identifiant national d'échec de chaque joueur devra etre utilisé lors de la saisie dans le système de ces derniers.
