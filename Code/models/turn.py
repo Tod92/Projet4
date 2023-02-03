@@ -5,7 +5,7 @@ class Turn:
 
     """
     def __init__(self, name, players_points_dict):
-        #players_points_dict doit etre un dict tuples contenant joueur et score
+        #players_points_dict doit etre un dict contenant joueur et score
         self.name = name
         self.is_started = False
         self.is_finished = False

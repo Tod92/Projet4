@@ -8,7 +8,7 @@ class PlayersController:
         self.views = views
 
     def is_chess_id_format(self, chess_id):
-        if len(chess_id) != 6:
+        if len(chess_id) != 7:
             return False
         start = chess_id[:2]
         try:
@@ -36,7 +36,7 @@ class PlayersController:
     def create_player(self):
         while True:
             chess_id = self.views.user_input("Identifiant National d'Echec")
-            #verification du format "AB1234"
+            #verification du format "AB12345"
             if self.is_chess_id_format(chess_id):
                 #verification de doublon de chess_id
                 if self.chess_id_in_players(chess_id) == False:
@@ -93,5 +93,5 @@ class PlayersController:
             player.lastname = self.views.user_input("Nom")
         #Date de naissance
         elif choice == 0:
-            player.birth = self.views.user_input("Date de naissance")            
+            player.birth = self.views.user_input("Date de naissance")
         return player

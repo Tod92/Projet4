@@ -2,6 +2,7 @@
 
 
 WINNER_POINTS = 1
+LOSER_POINTS = 0
 DRAW_POINTS = 0.5
 TURN_NAME = "Round"
 
@@ -83,17 +84,17 @@ class GameController:
             return None
         #Vainqueur = joueur 1
         elif choice == 0:
-            p1score, p2score = WINNER_POINTS , 0
+            p1score, p2score = WINNER_POINTS , LOSER_POINTS
         #Vainqueur = joueur 2
         elif choice == 1:
-            p1score, p2score = 0, WINNER_POINTS
-        #match nul
+            p1score, p2score = LOSER_POINTS, WINNER_POINTS
+        #Match nul
         elif choice == 2:
             p1score, p2score = DRAW_POINTS , DRAW_POINTS
         result = ([match.player1, p1score], [match.player2, p2score])
         self.tournament.turns[-1].matchs.pop(match_index)
         self.tournament.turns[-1].matchs.append(result)
-        #mise à jour des Scores
+        #Mise à jour des Scores
         self.update_turn_scores()
 
     def init_scores(self):
