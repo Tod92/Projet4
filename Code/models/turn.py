@@ -1,16 +1,18 @@
 from models.match import Match
-#from match import Match
+from datetime import datetime
+
+
 class Turn:
     """
 
     """
     def __init__(self, name, players_points_dict):
-        #players_points_dict doit etre un dict contenant joueur et score
+        #players_points_dict doit etre un dict contenant joueurs et scores
         self.name = name
         self.is_started = False
         self.is_finished = False
-        self.start_time = "TODO"
-        self.end_time = "TODO"
+        self.start_time = None
+        self.end_time = None
         self.matchs = self.gen_matchs(players_points_dict)
         self.scores = {}
 
@@ -35,9 +37,12 @@ class Turn:
 
     def start(self):
         """
+        La methode pass le tour en démarré et remplit l'heure de démarrage du
+        tour
         """
+        self.start_time = datetime.now()
         self.is_started = True
-        #remplir startdate
+
         return True
 
     def closing(self):
@@ -50,6 +55,7 @@ class Turn:
             if type(e) != tuple:
                 return False
         self.is_finished = True
+        self.end_time = datetime.now()
         return True
 
 

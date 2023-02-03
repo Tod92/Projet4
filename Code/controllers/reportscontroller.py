@@ -68,7 +68,8 @@ class ReportsController:
             tournament = self.pick_tournament(tournaments)
             report = ""
             for turn in tournament.turns:
-                 report += str(turn.name) + ": \n"
+                 report += str(turn.name) + " (" + self.turn_status(turn)
+                 report += ") : \n"
                  for m in turn.matchs:
                      if type(m) == tuple:
                          p1_name = m[0][0]
@@ -82,6 +83,22 @@ class ReportsController:
                      else:
                          report += str(m) + "\n"
             self.views.gen_report(report)
+
+    def turn_status(self, turn_obj):
+        """
+        Renvoi l'état du tour (str) : non démarré, démarré ou terminé.
+        Y ajoute la date et heure selon l'état
+        """
+        result = "!"
+        if turn_obj.is_finished == True:
+            result = "terminé le "
+            result += turn_obj.end_time.strftime("%d/%m/%Y %H:%M:%S")
+        elif turn_obj.is_started == True:
+            result = "démarré le "
+            result += turn_obj.start_time.strftime("%d/%m/%Y %H:%M:%S")
+        else:
+            result = "non démarré"
+        return result
 
     def run(self):
         while True:

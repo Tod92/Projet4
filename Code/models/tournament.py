@@ -1,5 +1,6 @@
 from models.turn import Turn
-#from turn import Turn
+
+import random
 
 
 class Tournament:
@@ -19,7 +20,6 @@ class Tournament:
         self.description = description
         self.nb_turns = nb_turns
         self.is_finished = False
-        self.encounters = []
 
 
     def __str__(self):
@@ -40,6 +40,8 @@ class Tournament:
         """
         """
         if self.turn_number == 0:
+            #Mélange des joueurs de façon aléatoire
+            random.shuffle(self.players)
             self.scores = {p.chess_id: 0 for p in self.players}
         turn = Turn(turn_name, self.scores)
         self.turns.append(turn)
@@ -49,7 +51,7 @@ class Tournament:
 
     def is_playable(self):
         """
-        renvoie True si les conditions sont remplies pour pouvoir jouer
+        Renvoie True si les conditions sont remplies pour pouvoir jouer
         le tournoi : non terminé, liste joueurs non vide et nb joueurs pair
         """
         #TODO : gestion exceptions pour remonter la raison du unplayable
