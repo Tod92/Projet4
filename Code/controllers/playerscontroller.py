@@ -45,9 +45,9 @@ class PlayersController:
                     self.views.show_user("Identifiant déja présent")
             else:
                 self.views.show_user("Erreur de format de l'identiant. ")
-        firstname = self.views.user_input("Prénom")
-        lastname = self.views.user_input("Nom")
-        birth = self.views.user_input("Date de naissance")
+        firstname = self.views.user_input("Prénom", type="str")
+        lastname = self.views.user_input("Nom", type="str")
+        birth = self.views.user_input("Date de naissance", type="int")
         newplayer = Player(chess_id, firstname, lastname, birth)
         self.players.append(newplayer)
         return self.players
@@ -87,11 +87,11 @@ class PlayersController:
             return player
         # Prenom
         elif choice == 0:
-            player.firstname = self.views.user_input("Prenom")
+            player.firstname = self.views.user_input("Prenom", type="str")
         # Nom
         elif choice == 0:
-            player.lastname = self.views.user_input("Nom")
+            player.lastname = self.views.user_input("Nom", type="str")
         # Date de naissance
         elif choice == 0:
-            player.birth = self.views.user_input("Date de naissance")
+            player.birth = self.views.user_input("Date de naissance", type="int")
         return player

@@ -25,8 +25,8 @@ class TournamentsController:
         id = len(self.tournaments)
         name = self.views.user_input("Nom du tournoi")
         place = self.views.user_input("Lieu du tournoi")
-        start_date = self.views.user_input("Date de début")
-        end_date = self.views.user_input("Date de fin")
+        start_date = self.views.user_input("Date de début", type="int")
+        end_date = self.views.user_input("Date de fin", type="int")
         turn_number = 0
         players = []
         description = self.views.user_input("Description du tournoi")
@@ -100,17 +100,17 @@ class TournamentsController:
             tournament_object.description = self.views.user_input("Description du tournoi")
         # Choix date de début
         elif choice == 3:
-            tournament_object.start_date = self.views.user_input("Date de début")
+            tournament_object.start_date = self.views.user_input("Date de début", type="int")
         # Choix date de fin
         elif choice == 4:
-            tournament_object.end_date = self.views.user_input("Date de fin")
+            tournament_object.end_date = self.views.user_input("Date de fin", type="int")
         # Choix nombre de tour
         elif choice == 5:
             # Nombre de tours non modifiable si tournoi démarré
             if tournament_object.turn_number != 0:
                 self.views.show_user("Nombre de tours non modifiable. Tournoi démarré")
                 return tournament_object
-            tournament_object.nb_turns = self.views.user_input("Nombre de tours")
+            tournament_object.nb_turns = self.views.user_input("Nombre de tours", type="int")
         elif choice == 6:
             tournament_object = self.add_player_to_tournament(tournament_object)
 

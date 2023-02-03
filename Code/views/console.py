@@ -40,10 +40,11 @@ class ConsoleView:
                 return result
             elif type == "int":
                 try:
-                    result = int(result)
+                    if result.isnumeric() is False:
+                        raise ValueError
                     return result
                 except ValueError:
-                    print("Erreur : un chiffre est attendu")
+                    print("Erreur : un nombre est attendu")
             elif type == "str":
                 try:
                     result = str(result)
