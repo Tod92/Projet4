@@ -1,4 +1,5 @@
-import json, jsonpickle
+import json
+import jsonpickle
 
 
 class JsonDatabase:
@@ -26,19 +27,19 @@ class JsonDatabase:
             with open(path, 'r') as file:
                 json_list = json.load(file)
             return jsonpickle.decode(json_list)
-        except:
+        except FileNotFoundError:
             empty_list = []
             self.write_file(empty_list, path)
             return empty_list
 
     def get_players(self):
-            return self.load_file(self.players_file_path)
-    def get_tournaments(self):
-            return self.load_file(self.tournaments_file_path)
-    def save_players(self, players):
-            self.write_file(players, self.players_file_path)
-    def save_tournaments(self, tournaments):
-            self.write_file(tournaments, self.tournaments_file_path)
+        return self.load_file(self.players_file_path)
 
-if __name__ == '__main__':
-    main()
+    def get_tournaments(self):
+        return self.load_file(self.tournaments_file_path)
+
+    def save_players(self, players):
+        self.write_file(players, self.players_file_path)
+
+    def save_tournaments(self, tournaments):
+        self.write_file(tournaments, self.tournaments_file_path)

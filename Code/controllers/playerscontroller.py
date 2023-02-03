@@ -15,7 +15,7 @@ class PlayersController:
             str(start)
         except ValueError:
             return False
-        if start.isupper() == False:
+        if start.isupper() is False:
             return False
         end = chess_id[2:]
         try:
@@ -36,11 +36,11 @@ class PlayersController:
     def create_player(self):
         while True:
             chess_id = self.views.user_input("Identifiant National d'Echec")
-            #verification du format "AB12345"
+            # Verification du format "AB12345"
             if self.is_chess_id_format(chess_id):
-                #verification de doublon de chess_id
-                if self.chess_id_in_players(chess_id) == False:
-                        break
+                # Verification de doublon de chess_id
+                if self.chess_id_in_players(chess_id) is False:
+                    break
                 else:
                     self.views.show_user("Identifiant déja présent")
             else:
@@ -48,7 +48,7 @@ class PlayersController:
         firstname = self.views.user_input("Prénom")
         lastname = self.views.user_input("Nom")
         birth = self.views.user_input("Date de naissance")
-        newplayer = Player(chess_id,firstname, lastname, birth)
+        newplayer = Player(chess_id, firstname, lastname, birth)
         self.players.append(newplayer)
         return self.players
 
@@ -56,8 +56,8 @@ class PlayersController:
         """
         renvoi liste de joueurs par ordre alphabetique du lastname
         """
-        #Tri de la liste par ordre alphabetique du lastname
-        self.players.sort(key= lambda x: x.lastname)
+        # Tri de la liste par ordre alphabetique du lastname
+        self.players.sort(key=lambda x: x.lastname)
         return self.players
 
     def list_players_choice(self):
@@ -69,7 +69,7 @@ class PlayersController:
             self.views.show_user("Liste joueurs vide")
             return self.players
         self.players = self.sort_lastname()
-        choice = self.views.prompt_choices(self.players, back = True)
+        choice = self.views.prompt_choices(self.players, back=True)
         if choice == -1:
             return self.players
         else:
@@ -81,17 +81,17 @@ class PlayersController:
     def manage_player(self, player):
         self.views.show_user(repr(player))
         menu = self.menus.players_modification
-        choice = self.views.prompt_choices(menu, back = True)
-        #Retour
+        choice = self.views.prompt_choices(menu, back=True)
+        # Retour
         if choice == -1:
             return player
-        #Prenom
+        # Prenom
         elif choice == 0:
             player.firstname = self.views.user_input("Prenom")
-        #Nom
+        # Nom
         elif choice == 0:
             player.lastname = self.views.user_input("Nom")
-        #Date de naissance
+        # Date de naissance
         elif choice == 0:
             player.birth = self.views.user_input("Date de naissance")
         return player

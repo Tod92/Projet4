@@ -1,5 +1,3 @@
-
-
 from models.tournament import Tournament
 
 
@@ -22,8 +20,8 @@ class TournamentsController:
 
     def create_tournament(self):
         self.load_tournaments()
-        #id détérminé par le nombre de tournois présents dans la liste
-        #à modifier si introduction de la suppression tournoi
+        # id détérminé par le nombre de tournois présents dans la liste
+        # à modifier si introduction de la suppression tournoi
         id = len(self.tournaments)
         name = self.views.user_input("Nom du tournoi")
         place = self.views.user_input("Lieu du tournoi")
@@ -33,13 +31,13 @@ class TournamentsController:
         players = []
         description = self.views.user_input("Description du tournoi")
         newtournament = Tournament(id,
-                                  name,
-                                  place,
-                                  start_date,
-                                  end_date,
-                                  turn_number,
-                                  players,
-                                  description)
+                                   name,
+                                   place,
+                                   start_date,
+                                   end_date,
+                                   turn_number,
+                                   players,
+                                   description)
 
         self.tournaments.append(newtournament)
         self.save_tournaments()
@@ -48,8 +46,8 @@ class TournamentsController:
         """
         renvoi liste de tournois par ordre de date début
         """
-        #Tri de la liste par date de demarrage
-        self.tournaments.sort(key = lambda x: x.start_date)
+        # Tri de la liste par date de demarrage
+        self.tournaments.sort(key=lambda x: x.start_date)
 
     def list_tournaments(self):
         """
@@ -61,7 +59,7 @@ class TournamentsController:
             self.views.show_user(self.menus.tournaments_empty)
             return None
         self.sort_start_date()
-        #return utilisé car fonction apellée par autre controller
+        # return utilisé car fonction apellée par autre controller
         return self.tournaments
 
     def list_tournaments_choice(self):
@@ -73,7 +71,7 @@ class TournamentsController:
         if self.tournaments == []:
             return None
         while True:
-            choice = self.views.prompt_choices(self.tournaments, back = True)
+            choice = self.views.prompt_choices(self.tournaments, back=True)
             if choice == -1:
                 return None
             else:
@@ -82,34 +80,33 @@ class TournamentsController:
                 self.tournaments.append(modified_tournament)
                 self.save_tournaments()
 
-
     def manage_tournament(self, tournament_object):
         """
         Affiche et permet de choisir l'element modifiable par l'utilisateur
         """
         choice = self.views.prompt_choices(self.menus.tournaments_modification,
-                                           back = True)
-        #choix retour
+                                           back=True)
+        # Choix retour
         if choice == -1:
             return tournament_object
-        #choix nom
+        # Choix nom
         elif choice == 0:
             tournament_object.name = self.views.user_input("Nom du tournoi")
-        #choix Lieu
+        # Choix Lieu
         elif choice == 1:
             tournament_object.place = self.views.user_input("Lieu du tournoi")
-        #choix description
+        # Choix description
         elif choice == 2:
             tournament_object.description = self.views.user_input("Description du tournoi")
-        #choix date de début
+        # Choix date de début
         elif choice == 3:
             tournament_object.start_date = self.views.user_input("Date de début")
-        #choix date de fin
+        # Choix date de fin
         elif choice == 4:
             tournament_object.end_date = self.views.user_input("Date de fin")
-        #choix nombre de tour
+        # Choix nombre de tour
         elif choice == 5:
-            #nombre de tours non modifiable si tournoi démarré
+            # Nombre de tours non modifiable si tournoi démarré
             if tournament_object.turn_number != 0:
                 self.views.show_user("Nombre de tours non modifiable. Tournoi démarré")
                 return tournament_object
@@ -137,7 +134,7 @@ class TournamentsController:
             return tournament_object
 
         self.views.show_user("Selectionner le joueur à ajouter au tournoi")
-        choice = self.views.prompt_choices(self.players, back = True)
+        choice = self.views.prompt_choices(self.players, back=True)
         if choice == -1:
             return tournament_object
         player = self.players.pop(choice)

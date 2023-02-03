@@ -3,6 +3,7 @@ from controllers.tournamentscontroller import TournamentsController
 from controllers.gamecontroller import GameController
 from controllers.reportscontroller import ReportsController
 
+
 class Controller:
     """
     Main controller
@@ -23,7 +24,7 @@ class Controller:
             self.init_tournaments_menu()
         elif choice == 3:
             self.init_report_menu()
-        #To quit
+        # To quit
         elif choice == 4:
             return False
         return True
@@ -34,35 +35,34 @@ class Controller:
                                                           self.menus,
                                                           self.views)
             tournaments = tournamentscontroller.list_tournaments()
-            if tournaments == None:
+            if tournaments is None:
                 return None
             self.views.show_user(self.menus.choose_tournament)
             choice = self.views.prompt_choices(tournaments,
-                                               back = True)
-            #choix retour
+                                               back=True)
+            # Choix retour
             if choice == -1:
                 return None
             else:
-                if tournaments[choice].is_playable() == False:
+                if tournaments[choice].is_playable() is False:
                     print("TOURNOI NON JOUABLE")
                     return None
                 tournament_id = tournaments[choice]._id
                 self.game(tournament_id)
 
-
     def init_players_menu(self):
         while True:
             players = self.database.get_players()
             playerscontroller = PlayersController(players, self.menus, self.views)
-            choice = self.views.prompt_choices(self.menus.players_management, back = True)
-            #choix retour
+            choice = self.views.prompt_choices(self.menus.players_management, back=True)
+            # Choix retour
             if choice == -1:
                 return None
-            #creation joueur
+            # Creation joueur
             elif choice == 0:
                 newplayers = playerscontroller.create_player()
                 self.database.save_players(newplayers)
-            #liste joueurs
+            # Liste joueurs
             elif choice == 1:
                 newplayers = playerscontroller.list_players_choice()
                 self.database.save_players(newplayers)
@@ -73,25 +73,24 @@ class Controller:
                                                           self.menus,
                                                           self.views)
             choice = self.views.prompt_choices(self.menus.tournaments_management,
-                                               back = True)
-            #choix retour
+                                               back=True)
+            # Choix retour
             if choice == -1:
                 return None
-            #creation tournoi
+            # Creation tournoi
             elif choice == 0:
                 tournamentscontroller.create_tournament()
-            #liste tournois
+            # Liste tournois
             elif choice == 1:
                 tournamentscontroller.list_tournaments_choice()
 
-
     def init_report_menu(self):
         reportscontroller = ReportsController(self.database,
-                                        self.menus,
-                                        self.views)
+                                              self.menus,
+                                              self.views)
         reportscontroller.run()
 
-    def game(self,tournament_id):
+    def game(self, tournament_id):
         gamecontroller = GameController(self.database,
                                         self.menus,
                                         self.views,

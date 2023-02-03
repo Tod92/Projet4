@@ -1,13 +1,14 @@
 BACK = "Retour"
 
+
 class ConsoleView:
     """
     Vue terminal de commandes
     """
     def star_decorator(fonction):
-        def modified(*args,**kwargs):
+        def modified(*args, **kwargs):
             print(20*"*")
-            result = fonction(*args,**kwargs)
+            result = fonction(*args, **kwargs)
             print(20*"*")
             return result
         return modified
@@ -18,24 +19,24 @@ class ConsoleView:
         return None
 
     @star_decorator
-    def prompt_choices(self, liste, back = False):
-        """Fonction d'affichage du menu de choix en fonction de la liste en entrée.
+    def prompt_choices(self, menu, back=False):
+        """Fonction d'affichage du menu de choix en fonction de la liste
+        en entrée.
         Renvoie l'index de l'element choisi.
         Si back : True, ajoute le choix retour qui renvoi -1
         """
-        l = list(liste)
-        if back == True:
-            print(0,". ", BACK)
+        if back:
+            print(0, ". ", BACK)
         num = 1
-        for e in l:
-            print(num,". ",e)
+        for e in menu:
+            print(num, ". ", e)
             num += 1
         return int(input("Ton choix : ")) - 1
 
-    def user_input(self, question, type = "free"):
+    def user_input(self, question, type="free"):
         while True:
             result = input("Saisir " + question + ":\n")
-            if type =="free":
+            if type == "free":
                 return result
             elif type == "int":
                 try:
@@ -49,9 +50,6 @@ class ConsoleView:
                     return result
                 except ValueError:
                     print("Erreur : du texte est attendu")
-
-
-
 
     def gen_report(self, text):
         print("GENERATION RAPPORT :")

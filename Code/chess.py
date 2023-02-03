@@ -1,5 +1,6 @@
 """Entry point."""
 
+
 from models.database import JsonDatabase
 from models.menus import Menus
 
@@ -9,12 +10,10 @@ from views.base import Views
 from views.console import ConsoleView
 from views.reporting import Reporting
 
-JSON_PLAYERS_PATH = "..\Data\Players\Players.json"
-JSON_TOURNAMENTS_PATH = "..\Data\Tournaments\Tournaments.json"
-REPORT_PATH = "..\Reports\Report.txt"
+JSON_PLAYERS_PATH = r"..\Data\Players\Players.json"
+JSON_TOURNAMENTS_PATH = r"..\Data\Tournaments\Tournaments.json"
+REPORT_PATH = r"..\Reports\Report.txt"
 
-#JSON_PLAYERS_PATH = "Players.json"
-#JSON_TOURNAMENTS_PATH = "Tournaments.json"
 
 def main():
     database = JsonDatabase(JSON_PLAYERS_PATH, JSON_TOURNAMENTS_PATH)
@@ -26,6 +25,7 @@ def main():
 
     app = Controller(database, menus, views)
     app.run()
+
 
 if __name__ == "__main__":
     main()

@@ -7,7 +7,7 @@ class Turn:
 
     """
     def __init__(self, name, players_points_dict):
-        #players_points_dict doit etre un dict contenant joueurs et scores
+        # players_points_dict doit etre un dict contenant joueurs et scores
         self.name = name
         self.is_started = False
         self.is_finished = False
@@ -20,10 +20,10 @@ class Turn:
         return self.name + " : " + str(self.matchs)
 
     def gen_matchs(self, players_points_dict):
-        #Tri du dictionnaire du plus gros score au plus petit
+        # Tri du dictionnaire du plus gros score au plus petit
         liste_triee = sorted(players_points_dict.items(),
-                            key=lambda x: x[1],reverse = True)
-        #On ne garde que les joueurs dans la liste désormais triée
+                             key=lambda x: x[1], reverse=True)
+        # On ne garde que les joueurs dans la liste désormais triée
         liste_triee = [e[0] for e in liste_triee]
         print("liste_triee dans gen_matchs" + str(liste_triee))
         matchs = []
@@ -57,12 +57,3 @@ class Turn:
         self.is_finished = True
         self.end_time = datetime.now()
         return True
-
-
-if __name__ == '__main__':
-    scores = {"Tod" : 5, "benj" : 2, "hugo" : 1, "jess" : 0}
-    turn = Turn("Round", scores)
-    print(turn)
-    scores = {"Tod" : 0, "benj" : 0, "hugo" : 10, "jess" : 10}
-    turn = Turn("Round", scores)
-    print(turn)

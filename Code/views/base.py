@@ -7,7 +7,7 @@ class Views:
         self.active_view = active_view
         self.views = views
 
-    def prompt_choices(self, choices, back = False):
+    def prompt_choices(self, choices, back=False):
         """
         choices : liste
         retourne l'indice -1 si retour choisi avec back:True
@@ -18,7 +18,7 @@ class Views:
         self.active_view.show_user(text)
         return None
 
-    def user_input(self, question, type = "free"):
+    def user_input(self, question, type="free"):
         return self.active_view.user_input(question, type)
 
     def gen_report(self, text):
