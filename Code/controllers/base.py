@@ -58,7 +58,7 @@ class Controller:
             # Choix retour
             if choice == -1:
                 return None
-            # Creation joueur
+            # Nouveau joueur
             elif choice == 0:
                 newplayers = playerscontroller.create_player()
                 self.database.save_players(newplayers)

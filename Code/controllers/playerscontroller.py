@@ -89,9 +89,9 @@ class PlayersController:
         elif choice == 0:
             player.firstname = self.views.user_input("Prenom", type="str")
         # Nom
-        elif choice == 0:
+        elif choice == 1:
             player.lastname = self.views.user_input("Nom", type="str")
         # Date de naissance
-        elif choice == 0:
+        elif choice == 2:
             player.birth = self.views.user_input("Date de naissance", type="int")
         return player

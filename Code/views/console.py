@@ -31,7 +31,13 @@ class ConsoleView:
         for e in menu:
             print(num, ". ", e)
             num += 1
-        return int(input("Ton choix : ")) - 1
+        while True:
+            result = input("Ton choix : ")
+            try:
+                result = int(result) - 1
+                return result
+            except ValueError:
+                print("Erreur : un nombre est attendu")
 
     def user_input(self, question, type="free"):
         while True:
@@ -42,7 +48,7 @@ class ConsoleView:
                 try:
                     if result.isnumeric() is False:
                         raise ValueError
-                    return result
+                    return int(result)
                 except ValueError:
                     print("Erreur : un nombre est attendu")
             elif type == "str":

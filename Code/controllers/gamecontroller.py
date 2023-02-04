@@ -158,7 +158,7 @@ class GameController:
             # Demande au tour de se cloturer s'il le peut
             if turn.closing() is False:
                 self.views.show_user(self.menus.cant_close_turn)
-            elif self.tournament.turn_number == self.tournament.nb_turns:
+            if turn.is_finished and self.tournament.turn_number == self.tournament.nb_turns:
                 self.tournament.is_finished = True
         # Quitter
         elif choice == 2:
