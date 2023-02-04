@@ -35,7 +35,7 @@ https://github.com/Tod92/Projet4
   `..\Projet4-main\env\Scripts\activate.bat`
 
 * Executer le script python :\
-  `..\Projet4-main\python chess.py`
+  `..\Projet4-main\Code\python chess.py`
 
 
 * Penser à désactiver l'environnement virtuel :\
@@ -46,7 +46,7 @@ https://github.com/Tod92/Projet4
 * Se positionner dans le répertoire "Code" :\
   `flake8 --format=html --htmldir=flake8_rapport --max-line-length=119`
 
-* Les rapports HTML sont a récupérer dans le répértoire ..\Code\flake8_rapport
+* Les rapports HTML sont a récupérer dans le répértoire ..\Projet4-main\Code\flake8_rapport
 
 ## Précisions
 
