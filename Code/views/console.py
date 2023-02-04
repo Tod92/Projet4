@@ -25,8 +25,10 @@ class ConsoleView:
         Renvoie l'index de l'element choisi.
         Si back : True, ajoute le choix retour qui renvoi -1
         """
+        min_choice = 1
         if back:
             print(0, ". ", BACK)
+            min_choice = 0
         num = 1
         for e in menu:
             print(num, ". ", e)
@@ -34,10 +36,14 @@ class ConsoleView:
         while True:
             result = input("Ton choix : ")
             try:
-                result = int(result) - 1
-                return result
+                result = int(result)
+                if result < min_choice or result > len(menu):
+                    print("Erreur : choix indisponible")
+                else:
+                    return result - 1
             except ValueError:
                 print("Erreur : un nombre est attendu")
+
 
     def user_input(self, question, type="free"):
         while True:
