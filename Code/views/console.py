@@ -44,7 +44,6 @@ class ConsoleView:
             except ValueError:
                 print("Erreur : un nombre est attendu")
 
-
     def user_input(self, question, type="free"):
         while True:
             result = input("Saisir " + question + ":\n")

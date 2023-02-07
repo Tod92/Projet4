@@ -17,5 +17,5 @@ class Player:
     def __repr__(self):
         result = "(" + self.chess_id + ")"
         result += self.firstname + " " + self.lastname + " "
-        result += "né(e) le : " + self.birth
+        result += "né(e) le : " + str(self.birth)
         return result
